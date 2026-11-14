@@ -1,0 +1,12 @@
+{
+  "name": "chispa-verde",
+  "version": "1.0.0",
+  "description": "Tienda en línea de equipos que ahorran energía",
+  "scripts": {
+    "sass": "sass scss/estilos.scss css/estilos.css --no-source-map"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.106.1"
+  }
+}

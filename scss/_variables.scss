@@ -1,0 +1,24 @@
+// Parcial de Sass: solo variables y un mixin.
+// El guion bajo del nombre le dice a Sass que este archivo no se compila solo,
+// se usa desde estilos.scss con @use.
+
+// Variables de Sass (empiezan con $)
+$color-principal: #0B5D4B;   // verde oscuro: encabezado y títulos
+$color-acento: #FF8F1F;      // naranja: bordes y detalles
+$color-fondo: #F3F8F6;       // verde muy claro: fondo de la página
+$color-texto: #1B2A2F;       // casi negro: el texto
+$color-suave: #D6EBE4;       // verde claro: bordes y etiquetas
+$radio: 12px;                // esquinas redondeadas
+$sombra: 0 4px 12px rgba(0, 0, 0, 0.12);   // sombra suave
+
+// Anchos de pantalla para el diseño responsivo
+$tablet: 992px;              // hasta este ancho es tablet
+$celular: 576px;             // hasta este ancho es celular
+
+// Mixin: un grupo de propiedades que se reutiliza con @include
+// $relleno vale 16px si no se le pasa otro valor
+@mixin caja($relleno: 16px) {
+    padding: $relleno;
+    border-radius: $radio;
+    box-shadow: $sombra;
+}

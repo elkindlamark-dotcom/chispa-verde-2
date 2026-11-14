@@ -1,0 +1,367 @@
+/* Hoja de estilos de Chispa Verde, escrita en Sass.
+   Se compila a css/estilos.css con:
+   npx sass scss/estilos.scss css/estilos.css --no-source-map */
+
+// @use trae las variables y el mixin del parcial _variables.scss.
+// "as *" permite escribir $color-principal sin poner el nombre del archivo antes
+@use "variables" as *;
+
+/* Variables CSS (paleta de 5 colores). Se crean desde las de Sass con #{ } */
+:root {
+    --color-principal: #{$color-principal};
+    --color-acento: #{$color-acento};
+    --color-suave: #{$color-suave};
+    --color-fondo: #{$color-fondo};
+    --color-texto: #{$color-texto};
+}
+
+/* Selector de etiqueta: afecta a todo el body */
+body {
+    font-family: "Nunito", Arial, sans-serif;   // fuente de Google Fonts; si no carga, Arial
+    background-color: $color-fondo;
+    color: $color-texto;
+}
+
+/* Selector agrupado: los tres títulos comparten el mismo estilo */
+h1, h2, h3 {
+    color: $color-principal;
+    font-weight: 700;
+}
+
+/* Selector de clase (.encabezado) con anidamiento */
+.encabezado {
+    background-color: $color-principal;
+    margin-bottom: 24px;
+    @include caja(24px);   // el mixin con 24px de relleno
+
+    // Selector descendiente: se compila como .encabezado h1
+    h1 {
+        color: white;
+        margin: 0;
+    }
+
+    p {
+        color: #E3F5EF;
+        margin: 12px 0 16px;
+    }
+
+    // La media query también se anida: en celular, menos relleno y título más pequeño
+    @media (max-width: $celular) {
+        padding: 16px;
+
+        h1 {
+            font-size: 1.6rem;
+        }
+    }
+}
+
+// Logo y título en una fila
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .logo {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+/* Selector de id (#intro): la sección de introducción */
+#intro {
+    background-color: white;
+    padding: 16px 24px;
+    margin-bottom: 24px;
+    border-left: 6px solid $color-acento;
+    border-radius: $radio;
+}
+
+/* Menú con Flexbox */
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    // En celular el menú pasa a columna
+    @media (max-width: $celular) {
+        flex-direction: column;
+    }
+
+    // Selector de hijo: se compila como .menu > a
+    > a {
+        color: white;
+        text-decoration: none;
+        padding: 6px 16px;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 999px;
+        transition: background-color 0.3s, color 0.3s;   // primera transición
+
+        // Selector de atributo: el enlace de la página actual
+        &[aria-current="page"] {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        // Pseudoclase :hover (el mouse encima)
+        &:hover {
+            background-color: white;
+            color: $color-principal;
+        }
+
+        // Pseudoclase :focus (se llegó con la tecla Tab)
+        &:focus {
+            outline: 3px solid $color-acento;
+        }
+    }
+}
+
+/* Tarjetas con Grid: 3 columnas, 2 en tablet y 1 en celular */
+.tarjetas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+
+    @media (max-width: $tablet) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: $celular) {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Cada tarjeta, con el modelo de caja (padding, border, border-radius y box-shadow) */
+.tarjeta {
+    background-color: white;
+    border: 1px solid $color-suave;
+    @include caja;
+    transition: transform 0.3s, box-shadow 0.3s;   // segunda y tercera transición
+
+    &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    // Pseudoclase :first-child: la primera tarjeta lleva borde naranja arriba
+    &:first-child {
+        border-top: 6px solid $color-acento;
+    }
+}
+
+// Los números grandes de la portada
+.dato {
+    color: $color-principal;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+// Dibujo de cada producto
+.foto {
+    display: block;
+    width: 100%;
+    height: 160px;
+    object-fit: contain;      // la foto completa, sin recortarla
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+// Dibujo grande de la portada
+.portada-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 24px;
+}
+
+.precio {
+    color: $color-principal;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+// Etiqueta de la categoría
+.categoria {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background-color: $color-suave;
+    font-size: 0.8rem;
+}
+
+// El ahorro en kWh y en pesos
+.ahorro {
+    color: #0F7A5F;
+    font-weight: 700;
+}
+
+// Enlace a la tienda donde está el producto
+.fuente {
+    margin: 8px 0 0;
+    font-size: 0.85rem;
+}
+
+// Tarjeta del integrante en nosotros.html
+.perfil {
+    text-align: center;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background-color: $color-acento;
+    color: $color-texto;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+/* Filtros con Flexbox */
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.filtro {
+    border: 2px solid $color-principal;
+    background-color: white;
+    color: $color-principal;
+    padding: 6px 16px;
+    border-radius: 999px;
+    transition: background-color 0.3s;
+
+    // El botón con el mouse encima o el que está elegido (.activo)
+    &:hover,
+    &.activo {
+        background-color: $color-principal;
+        color: white;
+    }
+}
+
+// Buscador. Selector de atributo dentro de un descendiente
+.buscador {
+    margin-bottom: 16px;
+
+    input[type="text"] {
+        max-width: 420px;
+    }
+}
+
+/* Catálogo con Grid: productos a la izquierda y carrito a la derecha */
+.catalogo {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 16px;
+    align-items: start;
+
+    // Dentro del catálogo las tarjetas van de a 2 (en celular, de a 1)
+    .tarjetas {
+        grid-template-columns: repeat(2, 1fr);
+
+        @media (max-width: $celular) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    // Pseudoclase :nth-child(): el párrafo 4 de la tarjeta (la descripción)
+    // tiene altura mínima para que los precios queden alineados
+    .tarjeta p:nth-child(4) {
+        min-height: 72px;
+    }
+
+    // En tablet y celular el carrito pasa debajo del catálogo
+    @media (max-width: $tablet) {
+        grid-template-columns: 1fr;
+    }
+}
+
+#carrito {
+    background-color: white;
+    border: 2px solid $color-acento;
+    @include caja;
+    position: sticky;   // se queda visible mientras se baja
+    top: 16px;
+
+    @media (max-width: $tablet) {
+        position: static;
+    }
+}
+
+#lista-carrito {
+    padding-left: 18px;
+}
+
+// Formulario de contacto
+.formulario {
+    background-color: white;
+    border-left: 6px solid $color-acento;
+    margin-bottom: 24px;
+    @include caja(24px);
+
+    label {
+        font-weight: 700;
+    }
+}
+
+.respuesta {
+    margin-top: 16px;
+    color: $color-principal;
+    font-weight: 700;
+}
+
+// Selector de atributo: los enlaces que se abren en otra pestaña
+a[target="_blank"] {
+    color: $color-principal;
+    font-weight: 700;
+}
+
+.pie {
+    margin-top: 24px;
+    padding-top: 12px;
+    border-top: 1px solid $color-suave;
+    color: #52606D;
+    font-size: 0.9rem;
+
+    // :last-child quita el espacio de abajo al último párrafo
+    p:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* Bootstrap personalizado (sin tocar el archivo de Bootstrap).
+   Bootstrap usa variables --bs-... y aquí se les cambia el valor */
+
+/* Componente 1: botón primario con los colores de la tienda */
+.btn-primary {
+    --bs-btn-bg: var(--color-principal);
+    --bs-btn-border-color: var(--color-principal);
+    --bs-btn-hover-bg: var(--color-acento);
+    --bs-btn-hover-border-color: var(--color-acento);
+    --bs-btn-hover-color: #1B2A2F;
+    --bs-btn-active-bg: var(--color-acento);
+    --bs-btn-active-border-color: var(--color-acento);
+    --bs-btn-active-color: #1B2A2F;
+}
+
+/* Componente 2: aviso amarillo con el naranja de la tienda */
+.alert-warning {
+    background-color: #FFF4E0;
+    border-color: $color-acento;
+    border-left: 6px solid $color-acento;
+    border-radius: $radio;
+    color: #4A2E00;
+}
+
+/* Componente 3: campos del formulario cuando se hace clic en ellos */
+.form-control:focus,
+.form-select:focus {
+    border-color: $color-principal;
+    box-shadow: 0 0 0 0.25rem rgba(11, 93, 75, 0.25);
+}

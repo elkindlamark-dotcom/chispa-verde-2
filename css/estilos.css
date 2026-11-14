@@ -1,0 +1,334 @@
+/* Hoja de estilos de Chispa Verde, escrita en Sass.
+   Se compila a css/estilos.css con:
+   npx sass scss/estilos.scss css/estilos.css --no-source-map */
+/* Variables CSS (paleta de 5 colores). Se crean desde las de Sass con #{ } */
+:root {
+  --color-principal: #0B5D4B;
+  --color-acento: #FF8F1F;
+  --color-suave: #D6EBE4;
+  --color-fondo: #F3F8F6;
+  --color-texto: #1B2A2F;
+}
+
+/* Selector de etiqueta: afecta a todo el body */
+body {
+  font-family: "Nunito", Arial, sans-serif;
+  background-color: #F3F8F6;
+  color: #1B2A2F;
+}
+
+/* Selector agrupado: los tres títulos comparten el mismo estilo */
+h1, h2, h3 {
+  color: #0B5D4B;
+  font-weight: 700;
+}
+
+/* Selector de clase (.encabezado) con anidamiento */
+.encabezado {
+  background-color: #0B5D4B;
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+.encabezado h1 {
+  color: white;
+  margin: 0;
+}
+.encabezado p {
+  color: #E3F5EF;
+  margin: 12px 0 16px;
+}
+@media (max-width: 576px) {
+  .encabezado {
+    padding: 16px;
+  }
+  .encabezado h1 {
+    font-size: 1.6rem;
+  }
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.marca .logo {
+  width: 56px;
+  height: 56px;
+}
+
+/* Selector de id (#intro): la sección de introducción */
+#intro {
+  background-color: white;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  border-left: 6px solid #FF8F1F;
+  border-radius: 12px;
+}
+
+/* Menú con Flexbox */
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+@media (max-width: 576px) {
+  .menu {
+    flex-direction: column;
+  }
+}
+.menu > a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 16px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  transition: background-color 0.3s, color 0.3s;
+}
+.menu > a[aria-current=page] {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+.menu > a:hover {
+  background-color: white;
+  color: #0B5D4B;
+}
+.menu > a:focus {
+  outline: 3px solid #FF8F1F;
+}
+
+/* Tarjetas con Grid: 3 columnas, 2 en tablet y 1 en celular */
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+@media (max-width: 992px) {
+  .tarjetas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 576px) {
+  .tarjetas {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cada tarjeta, con el modelo de caja (padding, border, border-radius y box-shadow) */
+.tarjeta {
+  background-color: white;
+  border: 1px solid #D6EBE4;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.tarjeta:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+.tarjeta:first-child {
+  border-top: 6px solid #FF8F1F;
+}
+
+.dato {
+  color: #0B5D4B;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.foto {
+  display: block;
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.portada-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 24px;
+}
+
+.precio {
+  color: #0B5D4B;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.categoria {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background-color: #D6EBE4;
+  font-size: 0.8rem;
+}
+
+.ahorro {
+  color: #0F7A5F;
+  font-weight: 700;
+}
+
+.fuente {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+}
+
+.perfil {
+  text-align: center;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background-color: #FF8F1F;
+  color: #1B2A2F;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+/* Filtros con Flexbox */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filtro {
+  border: 2px solid #0B5D4B;
+  background-color: white;
+  color: #0B5D4B;
+  padding: 6px 16px;
+  border-radius: 999px;
+  transition: background-color 0.3s;
+}
+.filtro:hover, .filtro.activo {
+  background-color: #0B5D4B;
+  color: white;
+}
+
+.buscador {
+  margin-bottom: 16px;
+}
+.buscador input[type=text] {
+  max-width: 420px;
+}
+
+/* Catálogo con Grid: productos a la izquierda y carrito a la derecha */
+.catalogo {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.catalogo .tarjetas {
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (max-width: 576px) {
+  .catalogo .tarjetas {
+    grid-template-columns: 1fr;
+  }
+}
+.catalogo .tarjeta p:nth-child(4) {
+  min-height: 72px;
+}
+@media (max-width: 992px) {
+  .catalogo {
+    grid-template-columns: 1fr;
+  }
+}
+
+#carrito {
+  background-color: white;
+  border: 2px solid #FF8F1F;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  position: sticky;
+  top: 16px;
+}
+@media (max-width: 992px) {
+  #carrito {
+    position: static;
+  }
+}
+
+#lista-carrito {
+  padding-left: 18px;
+}
+
+.formulario {
+  background-color: white;
+  border-left: 6px solid #FF8F1F;
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+.formulario label {
+  font-weight: 700;
+}
+
+.respuesta {
+  margin-top: 16px;
+  color: #0B5D4B;
+  font-weight: 700;
+}
+
+a[target=_blank] {
+  color: #0B5D4B;
+  font-weight: 700;
+}
+
+.pie {
+  margin-top: 24px;
+  padding-top: 12px;
+  border-top: 1px solid #D6EBE4;
+  color: #52606D;
+  font-size: 0.9rem;
+}
+.pie p:last-child {
+  margin-bottom: 0;
+}
+
+/* Bootstrap personalizado (sin tocar el archivo de Bootstrap).
+   Bootstrap usa variables --bs-... y aquí se les cambia el valor */
+/* Componente 1: botón primario con los colores de la tienda */
+.btn-primary {
+  --bs-btn-bg: var(--color-principal);
+  --bs-btn-border-color: var(--color-principal);
+  --bs-btn-hover-bg: var(--color-acento);
+  --bs-btn-hover-border-color: var(--color-acento);
+  --bs-btn-hover-color: #1B2A2F;
+  --bs-btn-active-bg: var(--color-acento);
+  --bs-btn-active-border-color: var(--color-acento);
+  --bs-btn-active-color: #1B2A2F;
+}
+
+/* Componente 2: aviso amarillo con el naranja de la tienda */
+.alert-warning {
+  background-color: #FFF4E0;
+  border-color: #FF8F1F;
+  border-left: 6px solid #FF8F1F;
+  border-radius: 12px;
+  color: #4A2E00;
+}
+
+/* Componente 3: campos del formulario cuando se hace clic en ellos */
+.form-control:focus,
+.form-select:focus {
+  border-color: #0B5D4B;
+  box-shadow: 0 0 0 0.25rem rgba(11, 93, 75, 0.25);
+}
